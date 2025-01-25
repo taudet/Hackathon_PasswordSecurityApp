@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PassWordStrengthTester": {
+      "commandName": "Project",
+      "commandLineArgs": "1Thom@$75$"
+    }
+  }
+}
