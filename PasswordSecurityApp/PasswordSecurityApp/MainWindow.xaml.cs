@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,24 @@ namespace PasswordSecurityApp
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+
+            string testerPath = "C:..\\..\\..\\..\\..\\PassWordStrengthTester\\PassWordStrengthTester\\bin\\Debug\\net8.0\\PassWordStrengthTester.exe";
+
+            Process process = new Process();
+            process.StartInfo.FileName = testerPath;
+            process.StartInfo.Arguments = inputBox.Text.ToString();
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.UseShellExecute = false;
+
+            process.Start();
+
+            string output = process.StandardOutput.ReadToEnd();
+
+            outputBox.Text = output;
         }
     }
 }

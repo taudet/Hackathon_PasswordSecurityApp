@@ -119,7 +119,7 @@ double entropy = calculatePasswordEntropy(incomingPassword);
 
 if (entropy >= 80)
 {
-    passwordScore += 2;
+    passwordScore += 3;
 }
 else if (entropy < 80 && entropy > 40)
 {
@@ -129,6 +129,8 @@ else
 {
     passwordScore -= 2;
 }
+
+Console.WriteLine(passwordScore);
 
 return passwordScore;
 

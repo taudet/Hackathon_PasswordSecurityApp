@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="400,306,74,70">
+            <TextBlock x:Name="outputBox" Margin="-1,-1,-1,-1" />
+        </Border>
+        <Border BorderThickness="1" BorderBrush="Black"  Margin="71,298,422,61">
+            <TextBox x:Name="inputBox" Margin="-1,-1,-1,-1"/>
+        </Border>
 
+        <Button x:Name="Test" Content="Test" Click="Test_Click" FontSize="25" Margin="310,174,310,195"/>
+
+        <TabControl Margin="0,0,0,380">
+            <TabItem Header="PassWord Tester"/>
+            <TabItem Header="Password Manager"/>
+        </TabControl>
     </Grid>
 </Window>
