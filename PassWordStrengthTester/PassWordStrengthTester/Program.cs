@@ -9,7 +9,7 @@ int passwordScore = 0;
 
 
 bool isWordFoundList = isWordInList(incomingPassword, passwordList);
-bool isWordFoundDictionary = isWordInList(incomingPassword, passwordList);
+bool isWordFoundDictionary = isWordInList(incomingPassword, DictionaryList);
 
 if (isWordFoundList || isWordFoundDictionary)
 {
@@ -115,6 +115,21 @@ else
 }
 
 
+double entropy = calculatePasswordEntropy(incomingPassword);
+
+if (entropy >= 80)
+{
+    passwordScore += 2;
+}
+else if (entropy < 80 && entropy > 40)
+{
+    passwordScore++;
+}
+else
+{
+    passwordScore -= 2;
+}
+
 Console.WriteLine(passwordScore);
 
 return passwordScore;
@@ -163,4 +178,34 @@ int ConsecutiveChar(string passWord)
         previousChar = c;
     }
     return highestCharCount;
+}
+
+double calculatePasswordEntropy (string passWord)
+{
+    double n = 0;
+
+    if(passWord.Any(char.IsUpper))
+    {
+        n += 26;
+    }
+    if (passWord.Any(char.IsLower))
+    {
+        n += 26;
+    }
+    if (passWord.Any(char.IsDigit))
+    {
+        n += 10;
+    }
+    if (passWord.Any(char.IsPunctuation))
+    {
+        n += 32;
+    }
+    if (passWord.Any(char.IsSymbol))
+    {
+        n += 40;
+    }
+
+    double entropy = Math.Log2(Math.Pow(n, passWord.Length));
+
+    return entropy;
 }
