@@ -130,8 +130,6 @@ else
     passwordScore -= 2;
 }
 
-Console.WriteLine(passwordScore);
-
 return passwordScore;
 
 bool isWordInList(string incomingPassword, string wordTextFile)
