@@ -2,7 +2,7 @@
   "profiles": {
     "PassWordStrengthTester": {
       "commandName": "Project",
-      "commandLineArgs": "1Sully75$27062003"
+      "commandLineArgs": "123456"
     }
   }
 }

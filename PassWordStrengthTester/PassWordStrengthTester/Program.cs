@@ -1,22 +1,20 @@
 ﻿string incomingPassword = args[0];
 
 string passwordList = "10-million-password-list-top-1000000.txt";
+string DictionaryList = "words.txt";
 
-StreamReader reader = new StreamReader(passwordList);
 
-bool passwordFound = false;
+
 int passwordScore = 0;
 
-string line;
-while ((line = reader.ReadLine()) != null)
-{
 
-    if (line == incomingPassword)
-    {
-        passwordFound = true;
-        passwordScore = passwordScore -100;
-        break;
-    }
+bool isWordFoundList = isWordInList(incomingPassword, passwordList);
+bool isWordFoundDictionary = isWordInList(incomingPassword, passwordList);
+
+if (isWordFoundList || isWordFoundDictionary)
+{
+    passwordScore = -100;
+    return passwordScore;
 }
 
 
@@ -64,7 +62,7 @@ else if (intCount > 0 && intCount <= 6)
 }
 else
 {
-    passwordScore += 1;
+    passwordScore ++;
 }
 
 if (alphaCount == 0)
@@ -77,7 +75,7 @@ else if (alphaCount > 0 && intCount <= 6)
 }
 else
 {
-    passwordScore += 1;
+    passwordScore ++;
 }
 
 if (incomingPassword.Length <= 5)
@@ -97,4 +95,72 @@ else
     passwordScore += 2;
 }
 
+int consecutiveChar = ConsecutiveChar(incomingPassword);
+
+if (consecutiveChar == 1)
+{
+    passwordScore += 2;
+}
+else if (consecutiveChar == 2)
+{
+    passwordScore++;
+}
+else if (consecutiveChar == 3)
+{
+    passwordScore--;
+}
+else
+{
+    passwordScore -= 2;
+}
+
+
 Console.WriteLine(passwordScore);
+
+return passwordScore;
+
+bool isWordInList(string incomingPassword, string wordTextFile)
+{
+    StreamReader reader = new StreamReader(passwordList);
+
+    bool passwordFound = false;
+
+    string line;
+    while ((line = reader.ReadLine()) != null)
+    {
+
+        if (line == incomingPassword)
+        {
+            passwordFound = true;
+            break;
+        }
+    }
+    reader.Close();
+
+    return passwordFound;
+}
+
+int ConsecutiveChar(string passWord)
+{
+    int highestCharCount = 1;
+    int currentCharCount = 1;
+    char previousChar = ' ';
+
+    foreach(char c in passWord)
+    {
+        if (c == previousChar)
+        {
+            currentCharCount ++;
+        }
+        else if (c != previousChar && currentCharCount != 0)
+        {
+            if (currentCharCount > highestCharCount)
+            {
+                highestCharCount = currentCharCount;
+            }
+            currentCharCount = 1;
+        }
+        previousChar = c;
+    }
+    return highestCharCount;
+}
